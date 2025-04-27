@@ -5,6 +5,6 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui', '@nuxt/icon', '@nuxt/eslint'],
   css: ['~/assets/css/main.css'],
   app: {
-    baseURL: '/text-check/', // ⚡ <- replace with your GitHub repo name!
+    baseURL: '/text-check/',
   },
 })
