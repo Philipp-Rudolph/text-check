@@ -31,10 +31,12 @@
 
     <!-- Inputs -->
     <div class="w-full flex flex-col md:flex-row gap-6 mb-8">
-      <textarea v-model="firstString" placeholder="Enter first text..."
+      <textarea
+        v-model="firstString" placeholder="Enter first text..."
         class="w-full h-48 md:h-64 p-4 bg-[#222538] border border-[#333] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#00ffc8] focus:border-transparent text-sm md:text-base" />
 
-      <textarea v-model="secondString" placeholder="Enter second text..."
+      <textarea
+        v-model="secondString" placeholder="Enter second text..."
         class="w-full h-48 md:h-64 p-4 bg-[#222538] border border-[#333] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#00ffc8] focus:border-transparent text-sm md:text-base" />
     </div>
 
@@ -74,7 +76,8 @@
             </p>
 
             <div class="whitespace-pre-wrap break-words text-sm md:text-lg">
-              <span v-for="(part, index) in differences" :key="index" :class="[
+              <span
+                v-for="(part, index) in differences" :key="index" :class="[
                 part.added ? 'bg-green-900 text-green-400' : '',
                 part.removed ? 'bg-red-900 text-red-400' : '',
                 (!part.added && !part.removed) ? 'text-gray-300' : '',
@@ -125,7 +128,7 @@ watch([firstString, secondString, mode], () => {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.4s ease, transform 0.2s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease-in-out;
 }
 
 .fade-enter-from,
