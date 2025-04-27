@@ -63,14 +63,26 @@
       <h2 class="text-xl md:text-2xl mb-4 font-semibold text-center md:text-left">Result:</h2>
 
       <!-- Exact Match -->
-      <div v-if="isExactMatch" class="flex items-center justify-center md:justify-start gap-2 bg-green-900 text-green-400 p-4 rounded-lg mb-6">
-        <Icon name="uil:check-circle" class="text-green-400 text-2xl" /> 
-        Strings are identical! No differences found.
+      <div v-if="isExactMatch" class="flex flex-col items-center justify-center md:justify-start gap-2">
+        <div class="flex gap-2 bg-green-900 text-green-400 p-4 rounded-lg mb-6">
+          <Icon name="uil:check-circle" class="text-green-400 text-2xl" /> 
+          <p>{{ mode === 'chars' ? 'Characters' : 'Words' }} are identical! No differences found.</p>
+        </div>
+        <div class="bg-[#2a2d3b] p-4 md:p-6 rounded-lg overflow-x-auto max-h-[300px] w-full whitespace-pre-wrap break-words text-sm md:text-lg flex flex-col gap-2">
+          {{ firstString }}<hr class="w-full border-b border-gray-600">{{ secondString }}
+        </div>
       </div>
 
       <!-- Differences -->
       <div v-else class="bg-[#2a2d3b] p-4 md:p-6 rounded-lg overflow-x-auto max-h-[300px]">
-        <p class="text-xs md:text-sm text-gray-400 mb-4">Green = Added | Red = Removed</p>
+        <!-- <p class="text-xs md:text-sm text-gray-400 mb-4">Green = Added | Red = Removed</p> -->
+        <p class="text-xs md:text-sm text-gray-400 mb-4">
+          <span class="text-green-400">Green</span> = Added | 
+          <span class="text-red-400"> Red</span> = Removed
+        </p>
+        <p class="text-xs md:text-sm text-gray-400 mb-4">
+          <span class="text-gray-300">Gray</span> = Unchanged
+        </p>
 
         <div class="whitespace-pre-wrap break-words text-sm md:text-lg">
           <span 
