@@ -1,41 +1,53 @@
 <template>
-  <div class="max-w-7xl mx-auto p-8 bg-[#1a1d2d] rounded-2xl shadow-lg text-white font-mono flex flex-col items-center">
-    <div class="flex items-center gap-4 mb-6">
+  
+  <div class="max-w-7xl mx-auto p-6 md:p-8 bg-[#1a1d2d] rounded-2xl shadow-lg text-white font-mono flex flex-col items-center">
+
+    <!-- Header -->
+    <div class="flex items-center gap-3 mb-6">
       <Icon name="uil:search" class="text-white text-3xl" />
-      <h1 class="text-3xl text-[#00ffc8] font-bold">Vue 3 Diff Checker</h1>
+      <h1 class="text-2xl md:text-3xl text-[#00ffc8] font-bold text-center">Diff Checker</h1>
     </div>
 
-    <p class="text-gray-400 mb-8 text-center">Paste two texts or code snippets below to analyze their differences in real-time.</p>
+    <!-- Subtitle -->
+    <p class="text-gray-400 mb-8 text-center text-sm md:text-base px-4">
+      Paste two texts or code snippets below to analyze their differences in real-time.
+    </p>
 
-    <div class="w-full flex flex-col md:flex-row gap-6 mb-6">
+    <!-- Inputs -->
+    <div class="w-full flex flex-col md:flex-row gap-6 mb-8">
       <textarea 
         v-model="firstString"
         placeholder="Enter first text..."
-        class="w-full h-64 p-4 bg-[#222538] border border-[#333] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#00ffc8] focus:border-transparent"
+        class="w-full h-48 md:h-64 p-4 bg-[#222538] border border-[#333] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#00ffc8] focus:border-transparent text-sm md:text-base"
       />
-
+      
       <textarea 
         v-model="secondString"
         placeholder="Enter second text..."
-        class="w-full h-64 p-4 bg-[#222538] border border-[#333] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#00ffc8] focus:border-transparent"
+        class="w-full h-48 md:h-64 p-4 bg-[#222538] border border-[#333] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#00ffc8] focus:border-transparent text-sm md:text-base"
       />
     </div>
 
-    <div v-if="(!firstString && !secondString) && comparisonDone" class="text-red-400 font-bold mb-6">
+    <!-- Error message -->
+    <div v-if="(!firstString && !secondString) && comparisonDone" class="text-red-400 font-bold mb-6 text-center">
       Please enter both texts to compare.
     </div>
 
+    <!-- Results -->
     <div v-if="comparisonDone && (firstString || secondString)" class="w-full">
-      <h2 class="text-2xl mb-4 font-semibold">Result:</h2>
+      <h2 class="text-xl md:text-2xl mb-4 font-semibold text-center md:text-left">Result:</h2>
 
-      <div v-if="isExactMatch" class="flex items-center gap-2 bg-green-900 text-green-400 p-4 rounded-lg mb-4">
-        <Icon name="uil:check-circle" class="text-green-400" /> Strings are identical! No differences found.
+      <!-- Exact Match -->
+      <div v-if="isExactMatch" class="flex items-center justify-center md:justify-start gap-2 bg-green-900 text-green-400 p-4 rounded-lg mb-6">
+        <Icon name="uil:check-circle" class="text-green-400 text-2xl" /> 
+        Strings are identical! No differences found.
       </div>
 
-      <div v-else class="bg-[#2a2d3b] p-6 rounded-lg overflow-scroll max-h-[250px]">
-        <p class="text-sm text-gray-400 mb-4">Green = Added | Red = Removed</p>
+      <!-- Differences -->
+      <div v-else class="bg-[#2a2d3b] p-4 md:p-6 rounded-lg overflow-x-auto max-h-[300px]">
+        <p class="text-xs md:text-sm text-gray-400 mb-4">Green = Added | Red = Removed</p>
 
-        <div class="whitespace-pre-wrap break-words text-lg">
+        <div class="whitespace-pre-wrap break-words text-sm md:text-lg">
           <span 
             v-for="(part, index) in differences" 
             :key="index"

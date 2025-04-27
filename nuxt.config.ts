@@ -4,7 +4,4 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/ui', '@nuxt/icon', '@nuxt/eslint'],
   css: ['~/assets/css/main.css'],
-  app: {
-    baseURL: '/text-check/',
-  },
 })
