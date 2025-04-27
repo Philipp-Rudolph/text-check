@@ -8,10 +8,35 @@
       <h1 class="text-2xl md:text-3xl text-[#00ffc8] font-bold text-center">Diff Checker</h1>
     </div>
 
+
     <!-- Subtitle -->
     <p class="text-gray-400 mb-8 text-center text-sm md:text-base px-4">
       Paste two texts or code snippets below to analyze their differences in real-time.
     </p>
+
+
+    <!-- Mode Toggle -->
+    <div class="flex items-center gap-6 mb-6">
+      <label class="flex items-center gap-2 cursor-pointer">
+        <input 
+          v-model="mode" 
+          type="radio" 
+          value="chars" 
+          class="accent-[#00ffc8] w-4 h-4"
+        >
+        <span class="text-sm md:text-base text-gray-300">Characters</span>
+      </label>
+
+      <label class="flex items-center gap-2 cursor-pointer">
+        <input 
+          v-model="mode" 
+          type="radio" 
+          value="words" 
+          class="accent-[#00ffc8] w-4 h-4"
+        >
+        <span class="text-sm md:text-base text-gray-300">Words</span>
+      </label>
+    </div>
 
     <!-- Inputs -->
     <div class="w-full flex flex-col md:flex-row gap-6 mb-8">
@@ -68,7 +93,9 @@
 
 <script setup>
 import { ref, watch } from 'vue';
-import { diffChars } from 'diff';
+import { diffChars, diffWords } from 'diff';
+
+const mode = ref('chars'); // or 'words' for word-based comparison
 
 const firstString = ref('');
 const secondString = ref('');
@@ -83,12 +110,14 @@ const compareStrings = () => {
     isExactMatch.value = false;
     return;
   }
-  differences.value = diffChars(firstString.value, secondString.value);
+  
+  const diffMethod = mode.value === 'chars' ? diffChars : diffWords;
+  differences.value = diffMethod(firstString.value, secondString.value);
   comparisonDone.value = true;
   isExactMatch.value = firstString.value === secondString.value;
 };
 
-watch([firstString, secondString], () => {
+watch([firstString, secondString, mode], () => {
   compareStrings();
 });
 </script>
