@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-7xl mx-auto p-6 md:p-8 bg-[#1a1d2d] rounded-2xl shadow-lg text-white font-mono flex flex-col items-center">
+  <div class="container mx-auto p-6 md:p-8 bg-[#1a1d2d] rounded-2xl shadow-lg text-white font-mono flex flex-col items-center">
 
     <!-- Header -->
     <div class="flex items-center gap-3 mb-6">
@@ -27,10 +27,10 @@
     <!-- Inputs -->
     <div class="w-full flex flex-col md:flex-row gap-6 mb-8">
       <textarea v-model="firstString" placeholder="Enter first text..."
-        class="w-full h-48 md:h-64 p-4 bg-[#222538] border border-[#333] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#00ffc8] focus:border-transparent text-sm md:text-base" />
+        class=" h-48 w-full md:h-64 p-4 bg-[#222538] border border-[#333] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#00ffc8] focus:border-transparent text-sm md:text-base" />
       
       <textarea v-model="secondString" placeholder="Enter second text..."
-        class="w-full h-48 md:h-64 p-4 bg-[#222538] border border-[#333] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#00ffc8] focus:border-transparent text-sm md:text-base" />
+        class=" h-48 w-full md:h-64 p-4 bg-[#222538] border border-[#333] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#00ffc8] focus:border-transparent text-sm md:text-base" />
     </div>
 
     <!-- Error message -->
@@ -44,9 +44,7 @@
     <Transition name="fade">
     <div v-if="comparisonDone && (firstString || secondString)" class="w-full">
       <!-- Wrap the entire block with Transition -->
-        <div v-if="showCodeBox" class="w-full mb-6">
-          <h2 class="text-xl md:text-2xl mb-4 font-semibold text-center md:text-left">Result:</h2>
-
+        <div v-if="showCodeBox" class=" mb-6">
           <!-- Code Box -->
           <div class="bg-[#2a2d3b] p-4 md:p-6 rounded-lg overflow-x-auto max-h-[300px]">
             <p class="text-xs md:text-sm text-gray-400 mb-4">
@@ -59,7 +57,7 @@
             <template v-if="isExactMatch">
               <div class="whitespace-pre-wrap break-words text-sm md:text-lg flex flex-col gap-2">
                 {{ firstString }}
-                <hr class="w-full border-b border-gray-600">{{ secondString }}
+                <hr class=" border-b border-gray-600">{{ secondString }}
               </div>
             </template>
 
@@ -87,7 +85,7 @@
           </div>
           <div key="error" v-else class="flex gap-2 bg-red-900 text-red-400 p-4 rounded-lg items-center justify-center">
             <Icon name="uil:exclamation-triangle" class="text-red-400 text-2xl" />
-            <p>{{ mode === 'chars' ? 'Characters' : 'Words' }} have differences.</p>
+            <p>{{ mode === 'chars' ? 'Characters' : 'Words' }} have {{ differences.length }} differences.</p>
           </div>
         </Transition>
       </div>
