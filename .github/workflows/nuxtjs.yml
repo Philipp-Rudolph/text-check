@@ -20,7 +20,7 @@ jobs:
 
       # Set BASE URL for GitHub Pages
       - name: Set BASE_URL
-        run: echo "NUXT_APP_BASE_URL=/text-check/" >> $GITHUB_ENV
+        run: echo "NUXT_APP_BASE_URL=/diff-check/" >> $GITHUB_ENV
 
       # Install dependencies
       - run: npm install
